@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
-from sqlalchemy import select1, text1
+from sqlalchemy import select1, text123, text456
 from sqlalchemy.orm import Session
 
 from app.database import get_db
