@@ -1,0 +1,463 @@
+/* colors and fonts for the Products section only */
+.products {
+  --p-ink: #1c2620;
+  --p-muted: #5d6b62;
+  --p-surface: #ffffff;
+  --p-shelf: #eef3ef;
+  --p-line: #d3ddd5;
+  --p-accent: #1f6b4a;
+  --p-accent-ink: #ffffff;
+  --p-low: #f5c84b;
+  --p-low-ink: #3b2f00;
+  --p-out: #b83a26;
+  /* one color per HTTP method, like the /docs page */
+  --p-get: #2563a8;
+  --p-post: #1f6b4a;
+  --p-patch: #9a6700;
+  --p-delete: #b83a26;
+  --p-on-method: #ffffff;
+
+  font-family: 'Archivo', var(--sans);
+  color: var(--p-ink);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .products {
+    --p-ink: #e6ede8;
+    --p-muted: #93a399;
+    --p-surface: #121714;
+    --p-shelf: #1a211d;
+    --p-line: #2c3830;
+    --p-accent: #5fbf8f;
+    --p-accent-ink: #0d1a13;
+    --p-low: #d9a92b;
+    --p-low-ink: #1f1800;
+    --p-out: #ef7a63;
+    --p-get: #7fb0e8;
+    --p-post: #5fbf8f;
+    --p-patch: #e0b44a;
+    --p-delete: #ef7a63;
+    --p-on-method: #0d1a13;
+  }
+}
+
+/* ---------- HTTP method tags ---------- */
+
+.method {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--p-on-method);
+  vertical-align: 1px;
+}
+
+.method-get {
+  background: var(--p-get);
+}
+
+.method-post {
+  background: var(--p-post);
+}
+
+.method-patch {
+  background: var(--p-patch);
+}
+
+.method-delete {
+  background: var(--p-delete);
+}
+
+/* on the green button a green tag would disappear, so use a see-through one */
+.products .btn-primary .method {
+  background: rgba(255, 255, 255, 0.22);
+  color: inherit;
+}
+
+/* ---------- header ---------- */
+
+.products-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.products-title {
+  margin: 0;
+  font-size: 40px;
+  font-weight: 800;
+  font-stretch: 125%; /* Archivo's wide style */
+  letter-spacing: -0.5px;
+  color: var(--p-ink);
+}
+
+.products-count {
+  color: var(--p-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.products-notice {
+  min-height: 1.45em; /* keeps space so the page doesn't jump */
+  color: var(--p-accent);
+  font-weight: 600;
+}
+
+/* ---------- two columns: list + form ---------- */
+
+.products-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 24px;
+  align-items: start;
+}
+
+@media (max-width: 760px) {
+  .products-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ---------- the list ---------- */
+
+.shelf {
+  background: var(--p-shelf);
+  border-radius: 12px;
+  padding: 8px;
+}
+
+.shelf-caption {
+  padding: 6px 8px 10px;
+  font-size: 14px;
+  color: var(--p-muted);
+}
+
+.shelf-empty {
+  padding: 24px 16px;
+  color: var(--p-muted);
+}
+
+.shelf-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    'info stock'
+    'actions stock';
+  gap: 8px 16px;
+  padding: 14px 16px;
+  background: var(--p-surface);
+  border-radius: 8px;
+  border-left: 4px solid transparent;
+}
+
+.item.is-editing {
+  border-left-color: var(--p-accent);
+}
+
+.item.is-inactive .item-info {
+  opacity: 0.6;
+}
+
+.item-info {
+  grid-area: info;
+  min-width: 0;
+}
+
+.item-name {
+  font-weight: 650;
+  color: var(--p-ink);
+  overflow-wrap: anywhere;
+}
+
+.item-tag {
+  margin-left: 8px;
+  padding: 1px 8px;
+  border: 1px solid var(--p-line);
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--p-muted);
+  vertical-align: 2px;
+}
+
+.item-desc {
+  font-size: 15px;
+  color: var(--p-muted);
+  overflow-wrap: anywhere;
+}
+
+.item-price {
+  margin-top: 4px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* the stock number is the one big thing on the page */
+.item-stock {
+  grid-area: stock;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  min-width: 88px;
+  text-align: right;
+}
+
+.item-stock-number {
+  font-size: 48px;
+  line-height: 1;
+  font-weight: 800;
+  font-stretch: 62%; /* Archivo's narrowest style */
+  font-variant-numeric: tabular-nums;
+  color: var(--p-ink);
+}
+
+.item-stock-label {
+  font-size: 13px;
+  color: var(--p-muted);
+}
+
+.item-stock.is-low .item-stock-number {
+  background: var(--p-low);
+  color: var(--p-low-ink);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.item-stock.is-out .item-stock-number,
+.item-stock.is-out .item-stock-label {
+  color: var(--p-out);
+}
+
+.item-actions {
+  grid-area: actions;
+  display: flex;
+  gap: 8px;
+}
+
+/* ---------- the form ---------- */
+
+.editor {
+  position: sticky; /* stays in view while you scroll the list */
+  top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 20px;
+  border: 1px solid var(--p-line);
+  border-radius: 12px;
+  background: var(--p-surface);
+}
+
+@media (max-width: 760px) {
+  .editor {
+    position: static;
+  }
+}
+
+.editor-title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  font-stretch: 112%;
+  color: var(--p-ink);
+  overflow-wrap: anywhere;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.field input,
+.field textarea {
+  font: inherit;
+  font-weight: 400;
+  font-size: 16px; /* 16px stops phones from zooming in */
+  padding: 8px 10px;
+  border: 1px solid var(--p-line);
+  border-radius: 6px;
+  background: var(--p-surface);
+  color: var(--p-ink);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.field textarea {
+  resize: vertical;
+}
+
+.check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+}
+
+.check input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--p-accent);
+}
+
+/* the "what this sends" box */
+.request {
+  border-radius: 6px;
+  background: var(--p-shelf);
+  padding: 10px 12px;
+  font-size: 13px;
+}
+
+.request-line {
+  font-weight: 700;
+  color: var(--p-accent);
+}
+
+.request-body {
+  margin: 4px 0 0;
+  font-family: var(--mono);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  color: var(--p-ink);
+}
+
+.editor-error {
+  color: var(--p-out);
+  font-size: 15px;
+}
+
+.editor-hint {
+  color: var(--p-muted);
+  font-size: 14px;
+}
+
+.editor-actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* ---------- request log ---------- */
+
+.log {
+  margin-top: 16px;
+  padding: 16px 20px;
+  border: 1px solid var(--p-line);
+  border-radius: 12px;
+}
+
+.log-title {
+  margin: 0 0 8px;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--p-ink);
+}
+
+.log-empty {
+  color: var(--p-muted);
+  font-size: 15px;
+}
+
+.log-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.log-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 10px;
+  padding: 6px 0;
+  border-top: 1px solid var(--p-line);
+  font-size: 14px;
+}
+
+.log-item:first-child {
+  border-top: 0;
+}
+
+.log-path {
+  font-family: var(--mono);
+  color: var(--p-ink);
+  overflow-wrap: anywhere;
+}
+
+.log-status {
+  margin-left: auto;
+  color: var(--p-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.log-status.is-error {
+  color: var(--p-out);
+  font-weight: 600;
+}
+
+/* ---------- buttons ---------- */
+/* ".products .btn" is more specific than the plain "button" rule in App.css,
+   so these styles win */
+
+.products .btn {
+  align-self: auto;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.products .btn-primary {
+  background: var(--p-accent);
+  color: var(--p-accent-ink);
+}
+
+.products .btn-quiet {
+  background: transparent;
+  border-color: var(--p-line);
+  color: var(--p-ink);
+  padding: 6px 12px;
+}
+
+.products .btn-danger {
+  color: var(--p-out);
+}
+
+.products .btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* a clear ring when you move around with the Tab key */
+.products .btn:focus-visible,
+.products input:focus-visible,
+.products textarea:focus-visible {
+  outline: 2px solid var(--p-accent);
+  outline-offset: 2px;
+}

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import './App.css'
+import Products from './Products.jsx'
 
 // requests go to /api on the Vite server, which proxies them to the
 // FastAPI backend (see server.proxy in vite.config.js)
@@ -47,6 +48,8 @@ function App() {
   return (
     <main className="app">
       <h1>My App</h1>
+
+      <Products />
 
       <section className="card">
         <h2>Backend</h2>
